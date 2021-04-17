@@ -1,0 +1,16 @@
+name: Metis Notebook xDriver
+description: Metis Notebook xDriver component for Kubeflow
+inputs:
+  - {name: notebook_path, description: 'File path of the notebook to be converted and run'}
+  - {name: input_path, description: 'Input file path', optional: True}
+outputs:
+  - {name: output_path, description: 'Output file path'}
+implementation:
+  container:
+    image: futureweibostonlab/metis-notebook:latest
+    command: [python3, metis-notebook.py]
+    args: [
+      --notebook-path, {inputValue: notebook_path},
+      --input-path, {inputPath: input_path},
+      --output-path, {outputPath: output_path},
+    ]
